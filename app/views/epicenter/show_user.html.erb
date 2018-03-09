@@ -1,0 +1,74 @@
+<h1>@<%= @user.username %>'s Profile & Tweets</h1>
+
+<div class="col-sm-3 well">
+    <div class="well">
+        <img src="<%= @user.avatar %>" class="img-circle img-responsive" style="display: inline; padding: 10px">
+        
+        <div style="display: inline; margin: 10px">
+            <p><%= @user.name %></p>
+            <p><%= @user.location %></p>
+            <p><%= @user.bio %></p>
+            
+            <p>
+                <% if current_user.following.include?(@user.id) %>
+                    <%= link_to "following", unfollow_path(id: @user.id), class: "btn btn-primary", id:"unfollow_btn" %>
+                <% else %>
+                    <% if current_user.id != @user.id %>
+                    <%= link_to "Follow", now_following_path(id: @user.id), class: "btn btn-primary" %>
+                <% end %>
+                <% end %>
+            </p>
+            
+            <div class="well">
+                <p class="text=left">
+                    <%= link_to tweets_path(id: @user.id) do %>
+                </p>
+                    <p>Following</p>
+                    <p><%= @user.tweets.length %></p>
+                <% end %>
+                <p class= Text-center>
+                    <%= link_to all_following_path(id: @user.id) do %>
+                </p>
+                    <p>Following</p>
+                    <p><%= @user.following.length %></p>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-7">
+    <div class="row">
+        <% @user.tweets.each do |tweet| %>
+        <div class="col-sm-12 well">
+            <div class="col-sm-3">
+                <div class="well">
+                    <p>@<%= @user.username %></p>
+                    <img src="<%= @user.avatar %>" class="img-circle img-responsive" style="display: inline; padding: 5px">
+            	</div>
+            </div>
+            <div class="col-sm-9">
+                <div class="well">
+                   <p class="text-left"><%= tweet.message %></p>
+                </div>
+           </div>
+        </div>
+        <% end %>
+    </div>
+</div>
+
+
+<div class="col-sm-2 well">
+    <div class="well">
+        <p class="text-left">
+            <%= link_to "Who's following me:", all_following_path(id: @user.id) %>
+        </p>
+        <div class="well">
+            <%= @user.following.each do |x| %>
+                <p><%= x %></p>
+            <% end %>
+        </div>
+    
+    </div>
+</div>
+

@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container" style="background-color: white">
+  <p>
+    <strong>Message:</strong>
+    <%= @tweet.message %>
+  </p>
+  
+  <p>
+    <strong>User:</strong>
+    <%= link_to @tweet.user.username, 
+       show_user_path(id: @tweet.user.id) %>
+  </p>
+  
+  <p>
+    Posted <%= time_ago_in_words(@tweet.created_at) %> ago
+  </p>
+  
+  <%= link_to 'Edit', edit_tweet_path(@tweet) %> |
+  <%= link_to 'Back', tweets_path %>
+</div>
