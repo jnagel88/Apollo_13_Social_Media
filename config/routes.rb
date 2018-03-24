@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get '/' => 'epicenter#feed'
+  root 'epicenter#feed'
 
   get 'show_user' => 'epicenter#show_user'
 
